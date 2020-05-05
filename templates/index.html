@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <title>Image Filter</title>
+  </head>
+  <body>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+    .considering{
+      background-color: grey;
+    }
+  </style>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Image Filter</h1>
+      <p class="lead">Apply mean and median filters to any image!</p>
+    </div>
+  </div>
+  <div class="container">
+    <h4>Upload an Image</h4>
+    <form method="post" action="\convert" enctype = "multipart/form-data">
+      <div class = "row">
+        <div class="col-3">
+          <div class="form-group">
+          <label class="mr-sm-2" for="filterType">Filter Type</label>
+          <select name="filterT" class="custom-select mr-sm-2" id="filterType">
+            <option value="1" selected>Mean Filter</option>
+            <option value="2">Median Filter Filter</option>
+          </select>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+          <label class="mr-sm-2" for="filterWdith">Filter Width</label>
+          <select name="filterW" class="custom-select mr-sm-2" id="filterWdith">
+            <option value="1" selected>One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            <option value="4">Four</option>
+            <option value="5">Five</option>
+            <option value="6">Six</option>
+            <option value="7">Seven</option>
+            <option value="8">Eight</option>
+            <option value="9">Nine</option>
+          </select>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="custom-file">
+            <div class="form-group">
+              <label for="file1">Upload an Image</label>
+              <input type="file" class="form-control-file" name="uploadImage" id="file1">
+            </div>
+          </div>        </div>
+        <div class="col-2 align-self-end">
+          <button  type="submit" value="Upload" class="btn btn-primary mb-2">Convert</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <br/>
+  <div class="container">
+    <div class = "row">
+      <div class="col-12">
+      <p><strong>What is a Mean or Median Filter?</strong> - Mean or median filters are image processing
+      techniques that reduces the abruptness of color transitions in an given image by taking a arithmetic mean or
+      the median on the RGB values of surrounding pixels. This image is fully processed when every pixel has its
+      neighbour's mean or median taken. The amount of neighbours can be varied using the filter width - for example a width of 1 means
+      that any neighbour within 1 pixel is used for the mean or median calculation. This yields 8 neighbours in
+      (and the pixel itself) in the calculation. Similarily for a 2-width calculation - 24 neighbours are used
+      for the calculation. Increasing the filter width will increase the smoothness of the image but also
+      decrease image quality.</p>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-4 text-center">
+        <h5 class="text-left">Original Image</h5>
+        <table>
+          <tr>
+            <td>RGB: <br/>{0, 0, 0}</td>
+            <td>RGB: <br/>{0, 0, 0}</td>
+            <td>RGB: <br/>{0, 0, 0}</td>
+          </tr>
+          <tr>
+            <td>RGB: <br/>{5, 5, 5}</td>
+            <td>RGB: <br/>{5, 5, 5}</td>
+            <td>RGB: <br/>{5, 5, 5}</td>
+          </tr>
+          <tr>
+            <td>RGB: <br/>{10, 10, 10}</td>
+            <td>RGB: <br/>{10, 10, 10}</td>
+            <td>RGB: <br/>{10, 10, 10}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-4">
+        <h5 class="text-left">First Pixel Neighbours (width = 1)</h5>
+        <table>
+          <tr>
+            <td>RGB: <br/>{2, 2, 2}</td>
+            <td class="considering">RGB: <br/>{0, 0, 0}</td>
+            <td>RGB: <br/>{0, 0, 0}</td>
+          </tr>
+          <tr>
+            <td class="considering">RGB: <br/>{5, 5, 5}</td>
+            <td class="considering">RGB: <br/>{5, 5, 5}</td>
+            <td>RGB: <br/>{5, 5, 5}</td>
+          </tr>
+          <tr>
+            <td>RGB: <br/>{10, 10, 10}</td>
+            <td>RGB: <br/>{10, 10, 10}</td>
+            <td>RGB: <br/>{10, 10, 10}</td>
+          </tr>
+        </table>
+        <p class="text-left">Note: Int Division (5+5+0+0) // 4 = 2</p>
+      </div>
+      <div class="col-4">
+        <h5 class="text-left">First Pixel Neighbours (width = 2)</h5>
+        <table>
+          <tr>
+            <td>RGB: <br/>{5, 5, 5}</td>
+            <td class="considering">RGB: <br/>{0, 0, 0}</td>
+            <td class="considering">RGB: <br/>{0, 0, 0}</td>
+          </tr>
+          <tr>
+            <td class="considering">RGB: <br/>{5, 5, 5}</td>
+            <td class="considering">RGB: <br/>{5, 5, 5}</td>
+            <td class="considering">RGB: <br/>{5, 5, 5}</td>
+          </tr>
+          <tr>
+            <td class="considering">RGB: <br/>{10, 10, 10}</td>
+            <td class="considering">RGB: <br/>{10, 10, 10}</td>
+            <td class="considering">RGB: <br/>{10, 10, 10}</td>
+          </tr>
+        </table>
+        <p class="text-left">Note: (3(0) + 3(5) + 3(10)) // 9 = 5</p>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class="col-12">
+      <p><strong>How This Algorithm Applies the Filter</strong> - This algorithm exclusively operates on the Portable
+      Pixel Map(.ppm) format. Pixel map images are easy to read because each pixel is stored as a plain-text,
+      space delimited RGB value. For example, a dark pixel has the value "0 0 0".
+      Any uploaded image is converted to ppm image first and a filter is applied. The image is then converted
+      back to a more optimized format for download. This conversion is necessary because ppm images
+      are easy to work with but occupies a large space so it is suboptimal to transfer it back.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class = "col-4">
+       <h5 class="text-left">Original Image</h5>
+       <img src="/static/orig.png" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class = "col-4">
+       <h5 class="text-left">Median Filter (Width = 1)</h5>
+       <img src="/static/median3.png" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class = "col-4">
+       <h5 class="text-left">Mean Filter (Width = 5)</h5>
+       <img src="/static/mean11.png" class="img-fluid" alt="Responsive image">
+      </div>
+    </div>
+  </div>
+  <br/>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
