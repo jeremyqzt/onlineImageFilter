@@ -32,7 +32,7 @@
         <div class="col-3">
           <div class="form-group">
           <label class="mr-sm-2" for="filterType">Filter Type</label>
-          <select name="filterT" class="custom-select mr-sm-2" id="filterType">
+          <select name="filterT" class="custom-select mr-sm-2" id="filterType" required>
             <option value="1" selected>Mean Filter</option>
             <option value="2">Median Filter Filter</option>
           </select>
@@ -41,7 +41,7 @@
         <div class="col-3">
           <div class="form-group">
           <label class="mr-sm-2" for="filterWdith">Filter Width</label>
-          <select name="filterW" class="custom-select mr-sm-2" id="filterWdith">
+          <select name="filterW" class="custom-select mr-sm-2" id="filterWdith" required>
             <option value="1" selected>One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
@@ -58,7 +58,7 @@
           <div class="custom-file">
             <div class="form-group">
               <label for="file1">Upload an Image</label>
-              <input type="file" class="form-control-file" name="uploadImage" id="file1">
+              <input type="file" class="form-control-file" name="uploadImage" id="file1" required>
             </div>
           </div>        </div>
         <div class="col-2 align-self-end">

@@ -45,4 +45,3 @@ class ppmImageReader:
             
     def getImage(self):
         return self.image
-
