@@ -11,21 +11,23 @@ class serverFilterAdaptor:
 
     def convertToPPM(self):
         newName = ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))
-
+        #TODO
         return newName+".ppm"
 
     def convertToPNG(self, newPPM):
         newName = ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))      
-
+        #TODO
         return newName + ".png"
 
     def process(self):
-        newName = self.convertToPPM()
-        print(newName)
+        #newName = self.convertToPPM()
+        newName = self.fName
+        #print(newName)
         self.read(newName)
         self.doFilter(self.width, self.imageType)
         newPPM = self.write()
-        return self.convertToPNG(newPPM)
+        return newPPM
+        #return self.convertToPNG(newPPM)
 
     def read(self, nom):
         self.reader = ppmImageReader(self.locat + "/" + nom)
