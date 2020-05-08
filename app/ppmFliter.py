@@ -16,7 +16,7 @@ class ppmFilter:
 
     def getOriginaImg(self):
         return self.img
-    
+
 
 class ppmMeanFilter(ppmFilter):
     def __init__(self, img, filterWidth, filterHeight):
@@ -51,7 +51,6 @@ class ppmMedianFilter(ppmFilter):
             for col in range(0, len(self.imgPixels[row])):
                 newPix = self._getFilteredPixel(row, col, self.filterWidth, self.filterHeight)
                 self.filteredImage.addImgDataPix(newPix)
-            
 
     def _getFilteredPixel(self, row, col, filterWidth, filterHeight):
         rArr = []

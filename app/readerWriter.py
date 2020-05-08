@@ -9,12 +9,12 @@ class ppmImageWriter:
         self._writeHeaders(fHandle)
         for row in self.img.getImageArr():
             for col in row:
-                fHandle.write(" %d %d %d\n " % (col.r, col.g, col.b))
+                fHandle.write("%d %d %d\n" % (col.r, col.g, col.b))
 
     def _writeHeaders(self, fh):
-        fh.write(" %s\n " % (self.img.getFmt()))
-        fh.write(" %s\n " % (self.img.getWbH()))
-        fh.write(" %d\n " % (self.img.getColorMax()))
+        fh.write("%s\n" % (self.img.getFmt()))
+        fh.write("%s\n" % (self.img.getWbH()))
+        fh.write("%d\n" % (self.img.getColorMax()))
 
 
 class ppmImageReader:

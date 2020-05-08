@@ -1,33 +1,38 @@
 from ppmFliter import *
 import string
-import random
+import uuid
+import os
+
 class serverFilterAdaptor:
     def __init__(self, width, imgType, locat, fname):
         self.width = width
-        self.reader = ppmImageReader(locat+"/"+fname)
         self.imageType = imgType
         self.fName = fname
         self.locat = locat
 
     def convertToPPM(self):
-        newName = ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))
-        #TODO
-        return newName+".ppm"
+        newName = str(uuid.uuid4())
+        fullNewImage = "%s.ppm" % (newName)
+        shell = "convert -compress none %s/%s %s/%s" % (self.locat, self.fName, self.locat, fullNewImage)
+        ret = os.system(shell)
+        os.remove("%s/%s" %(self.locat, self.fName))
+        return fullNewImage
 
     def convertToPNG(self, newPPM):
-        newName = ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))      
-        #TODO
-        return newName + ".png"
+        newName = str(uuid.uuid4())
+        fullNewImage = "%s.png" % (newName)
+        shell = "convert -compress none %s/%s %s/%s" % (self.locat, newPPM, self.locat, fullNewImage)
+        ret = os.system(shell)
+        os.remove("%s/%s" %(self.locat, newPPM))
+        return fullNewImage
 
     def process(self):
-        #newName = self.convertToPPM()
-        newName = self.fName
-        #print(newName)
+        newName = self.convertToPPM()
         self.read(newName)
         self.doFilter(self.width, self.imageType)
         newPPM = self.write()
-        return newPPM
-        #return self.convertToPNG(newPPM)
+        os.remove("%s/%s" %(self.locat, newPPM))
+        return self.convertToPNG(newPPM)
 
     def read(self, nom):
         self.reader = ppmImageReader(self.locat + "/" + nom)
@@ -41,10 +46,11 @@ class serverFilterAdaptor:
         self.filter.filter()
 
     def write(self):
-        name = self.locat + "/filtered_" + self.fName
+        newName = str(uuid.uuid4())
+        name = "%s/%s.ppm" %(self.locat, newName)
         self.writer = ppmImageWriter(self.filter.getFilteredImg())
         self.writer.writePPM(name)
-        return "filtered_" + self.fName
+        return "%s.ppm" % (newName)
 
 
 
