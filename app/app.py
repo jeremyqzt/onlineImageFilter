@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from flask import Flask, request, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 from serverFilterAdaptor import *
@@ -16,7 +18,7 @@ def convertImage():
     width = int(request.form["filterW"])
     fp = "%s/%s" %(userImg, secure_filename(f.filename))
     f.save(fp)
-    filterType = request.form["filterT"]
+    filterType = int(request.form["filterT"])
     converterAdaptor = serverFilterAdaptor(width, filterType, userImg, secure_filename(f.filename))
     retName = converterAdaptor.process()
     result = send_from_directory(userImg, retName, as_attachment=True)

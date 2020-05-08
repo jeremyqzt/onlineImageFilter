@@ -15,7 +15,6 @@ class serverFilterAdaptor:
         fullNewImage = "%s.ppm" % (newName)
         shell = "convert -compress none %s/%s %s/%s" % (self.locat, self.fName, self.locat, fullNewImage)
         ret = os.system(shell)
-        os.remove("%s/%s" %(self.locat, self.fName))
         return fullNewImage
 
     def convertToPNG(self, newPPM):
@@ -23,7 +22,6 @@ class serverFilterAdaptor:
         fullNewImage = "%s.png" % (newName)
         shell = "convert -compress none %s/%s %s/%s" % (self.locat, newPPM, self.locat, fullNewImage)
         ret = os.system(shell)
-        os.remove("%s/%s" %(self.locat, newPPM))
         return fullNewImage
 
     def process(self):
@@ -31,7 +29,6 @@ class serverFilterAdaptor:
         self.read(newName)
         self.doFilter(self.width, self.imageType)
         newPPM = self.write()
-        os.remove("%s/%s" %(self.locat, newPPM))
         return self.convertToPNG(newPPM)
 
     def read(self, nom):
