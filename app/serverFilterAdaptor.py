@@ -1,4 +1,5 @@
 from ppmFliter import *
+from removalThread import *
 import string
 import uuid
 import os
@@ -15,6 +16,7 @@ class serverFilterAdaptor:
         fullNewImage = "%s.ppm" % (newName)
         shell = "convert -compress none %s/%s %s/%s" % (self.locat, self.fName, self.locat, fullNewImage)
         ret = os.system(shell)
+        os.remove("%s/%s" % (self.locat, self.fName))
         return fullNewImage
 
     def convertToPNG(self, newPPM):
@@ -22,6 +24,9 @@ class serverFilterAdaptor:
         fullNewImage = "%s.png" % (newName)
         shell = "convert -compress none %s/%s %s/%s" % (self.locat, newPPM, self.locat, fullNewImage)
         ret = os.system(shell)
+        os.remove("%s/%s" % (self.locat, newPPM))
+        th = removalThread("%s/%s" % (self.locat, fullNewImage), 5)
+        th.start()
         return fullNewImage
 
     def process(self):
@@ -32,8 +37,9 @@ class serverFilterAdaptor:
         return self.convertToPNG(newPPM)
 
     def read(self, nom):
-        self.reader = ppmImageReader(self.locat + "/" + nom)
+        self.reader = ppmImageReader("%s/%s" % (self.locat, nom))
         self.img = self.reader.getImage()
+        os.remove("%s/%s" % (self.locat, nom))
 
     def doFilter(self, width, filterType):
         if (filterType == 1):
