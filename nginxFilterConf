@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name 192.168.0.111 localhost;
+    server_name 35.202.128.63 spatialfilter.com;
 
     location / {
         include proxy_params;

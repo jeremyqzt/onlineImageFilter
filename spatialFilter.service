@@ -6,7 +6,7 @@ After=network.target
 [Service]
 User=root
 Group=www-data
-WorkingDirectory=/root/onlineImageFilter/app
+WorkingDirectory=/home/jeremyq357/onlineImageFilter/app
 ExecStart=/usr/local/bin/gunicorn -t9999 --workers 3 --bind unix:/var/www/filter.sock -g www-data -m 007 wsgi:app
 Restart=always
 RestartSec=10
