@@ -11,5 +11,8 @@ class removalThread(threading.Thread):
       self.removeDelay = time
    def run(self):
       time.sleep(self.removeDelay)
-      os.remove(self.toRemove)
+      try:
+         os.remove(self.toRemove)
+      except:
+         pass #No worries...
       return

@@ -4,8 +4,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     
     <title>Image Filter</title>
@@ -18,11 +16,39 @@
     .considering{
       background-color: grey;
     }
+    h1 { 
+      color: #111;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 75px; 
+      font-weight: bold;
+      letter-spacing: -1px;
+      line-height: 1; 
+    }
+    .lead { 
+      color: #111;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 15px; 
+    }
+    .jumbotron{
+      background-color: #ffe942;
+    }
+    body {
+      background-color: #F5F5F5;
+    }
+    footer{
+      padding-top: 30px;
+      padding-bottom: 30px;
+      background-color: #111;
+      color: 	#F5F5F5;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 15px; 
+    }
+
   </style>
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">Image Filter</h1>
-      <p class="lead">Apply mean and median filters to any image!</p>
+      <h1 class="underlined underlined--gradient">Spatial Filters</h1>
+      <p class="lead">Apply mean and median spacial filters to any Image!</p>
     </div>
   </div>
   <div class="container">
@@ -34,7 +60,7 @@
           <label class="mr-sm-2" for="filterType">Filter Type</label>
           <select name="filterT" class="custom-select mr-sm-2" id="filterType" required>
             <option value="1" selected>Mean Filter</option>
-            <option value="2">Median Filter Filter</option>
+            <option value="2">Median Filter</option>
           </select>
           </div>
         </div>
@@ -159,19 +185,45 @@
     <div class="row">
       <div class = "col-4">
        <h5 class="text-left">Original Image</h5>
-       <img src="/static/orig.png" class="img-fluid" alt="Responsive image">
+       <img src="/static/orig.png" class="img-fluid" alt="img/orig.png">
       </div>
       <div class = "col-4">
        <h5 class="text-left">Median Filter (Width = 6)</h5>
-       <img src="/static/median13.png" class="img-fluid" alt="Responsive image">
+       <img src="/static/median13.png" class="img-fluid" alt="img/median13.png">
       </div>
       <div class = "col-4">
        <h5 class="text-left">Mean Filter (Width = 5)</h5>
-       <img src="/static/mean11.png" class="img-fluid" alt="Responsive image">
+       <img src="/static/mean11.png" class="img-fluid" alt="img/mean11.png">
+      </div>
+    </div>
+    <br/>
+    <div class = "row">
+      <div class="col-12">
+      <p><strong>How Long Will an Uploaded Image be Kept For?</strong> - A image goes through 4 stages on the server.</p>
+      <p>First, it is converted to a PPM format (Regardless of the original format), the original image is deleted after this step. </p>
+      <p>Second, the PPM image is filtered and a new filtered PPM image is produced, the unfiltered image is deleted after this step. </p>
+      <p>Third, the filtered PPM image is converted the a filtered PNG format, the filtered PPM image is deleted after this step.</p>
+      <p>Last, the filtered PNG is send back to you and a worker thread will remove this image after 60 seconds. </p>
+      <p><strong>TLDR</strong>: 60 seconds after the image is sent back to you. </p>
       </div>
     </div>
   </div>
   <br/>
+  <footer>
+    <div class="container">
+      <div class= "row">
+        <div class="col-4">
+          Written by: Jeremy Qian and Ben Ni
+        </div>
+        <div class="col-4">
+          Source Code: <a href="https://github.com/jeremyqzt/onlineImageFilter">Github</a>
+        </div>
+        <div class="col-4">
+          Images Sourced From: <a href="https://unsplash.com/photos/ct_zXHu8rcM">UnSplash</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

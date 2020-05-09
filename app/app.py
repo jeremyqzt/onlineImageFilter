@@ -21,8 +21,11 @@ def convertImage():
     filterType = int(request.form["filterT"])
     converterAdaptor = serverFilterAdaptor(width, filterType, userImg, secure_filename(f.filename))
     retName = converterAdaptor.process()
-    result = send_from_directory(userImg, retName, as_attachment=True)
-    result.headers["x-suggested-filename"] = retName
+    if (retName != None):
+        result = send_from_directory(userImg, retName, as_attachment=True)
+        result.headers["x-suggested-filename"] = retName
+    else:
+        result = "An Error has Occurred"
     return result
 
 
