@@ -1,7 +1,10 @@
 server {
     listen 80;
-    server_name 35.202.128.63 spatialfilter.com;
-
+    listen 443 default_server ssl;
+    server_name 35.202.128.63 spatialfilter.com www.spatialfilter.com;
+    ssl_certificate /etc/letsencrypt/live/spatialfilter.com/fullchain.pem; 
+    ssl_certificate_key /etc/letsencrypt/live/spatialfilter.com/privkey.pem; 
+    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
     location / {
         include proxy_params;
         proxy_pass http://unix:/var/www/filter.sock:/;
