@@ -6,8 +6,8 @@ https://spatialfilter.com
 
 ## Setup Environment
 ```
-pip install flask gunicorn
 apt-get install python3.5 nginx imagemagick
+pip3 install flask gunicorn
 ```
 
 ## How to setup for debugging
