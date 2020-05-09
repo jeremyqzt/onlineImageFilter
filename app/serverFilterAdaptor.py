@@ -25,7 +25,7 @@ class serverFilterAdaptor:
         shell = "convert -compress none %s/%s %s/%s" % (self.locat, newPPM, self.locat, fullNewImage)
         ret = os.system(shell)
         os.remove("%s/%s" % (self.locat, newPPM))
-        th = removalThread("%s/%s" % (self.locat, fullNewImage), 5)
+        th = removalThread("%s/%s" % (self.locat, fullNewImage), 60)
         th.start()
         return fullNewImage
 
